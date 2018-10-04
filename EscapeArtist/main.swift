@@ -11,21 +11,8 @@ var shouldEsc = false
 // MARK: Startup
 class ApplicationDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
-        /*
-        if !acquirePrivileges() {
-            print("You need to enable EscapeArtist in the System Preferences")
-        }
- */
-        
         listenForEvents()
     }
-}
-
-// MARK: Acquire Privleges
-func acquirePrivileges() -> Bool {
-    let attrs = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as
-    CFDictionary
-    return AXIsProcessTrustedWithOptions(attrs)
 }
 
 // MARK: Event Monitor
