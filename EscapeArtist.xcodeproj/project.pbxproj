@@ -41,7 +41,7 @@
 		0CAFB55E1A68B91200F22A7B = {
 			isa = PBXGroup;
 			children = (
-				0CAFB5691A68B91200F22A7B /* SwiftLog */,
+				0CAFB5691A68B91200F22A7B /* EscapeArtist */,
 				0CAFB5681A68B91200F22A7B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,12 +54,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0CAFB5691A68B91200F22A7B /* SwiftLog */ = {
+		0CAFB5691A68B91200F22A7B /* EscapeArtist */ = {
 			isa = PBXGroup;
 			children = (
 				0CAFB56A1A68B91200F22A7B /* main.swift */,
 			);
-			path = SwiftLog;
+			path = EscapeArtist;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -78,7 +78,7 @@
 			dependencies = (
 			);
 			name = EscapeArtist;
-			productName = SwiftLog;
+			productName = EscapeArtist;
 			productReference = 0CAFB5671A68B91200F22A7B /* EscapeArtist */;
 			productType = "com.apple.product-type.tool";
 		};
@@ -96,7 +96,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0CAFB5621A68B91200F22A7B /* Build configuration list for PBXProject "SwiftLog" */;
+			buildConfigurationList = 0CAFB5621A68B91200F22A7B /* Build configuration list for PBXProject "EscapeArtist" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -243,7 +243,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0CAFB5621A68B91200F22A7B /* Build configuration list for PBXProject "SwiftLog" */ = {
+		0CAFB5621A68B91200F22A7B /* Build configuration list for PBXProject "EscapeArtist" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0CAFB56C1A68B91200F22A7B /* Debug */,
