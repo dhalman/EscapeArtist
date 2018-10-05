@@ -15,7 +15,7 @@ Usage:
 Installation:
 1) Download/Clone package
 2) Execute `./scripts/bootstrap.sh`
-3) (Sometimes Required) Accessbility permissions - When prompted, open accessibilty preferences and check the box next to EscapeArtist to allow ESC keycode globally. Feel free to test without installing permissions to see if necessary on your system.
+3) (Sometimes Required) Accessbility permissions - When prompted, open accessibilty preferences and check the box next to EscapeArtist to allow ESC keycode globally. Feel free to test without installing permissions to see if necessary on your system. If not required, feel free to remove the permission check from main.swift and rebuild/replace the bin in /usr/local/bin
 
 Uninstallation:
 1) Execute `./scripts/uninstall.sh`
