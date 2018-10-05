@@ -13,42 +13,38 @@ var shouldEsc = false
 // MARK: Startup
 class ApplicationDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
-        let os = ProcessInfo().operatingSystemVersion
-        if os.majorVersion == 10 && os.minorVersion >= 14 {
-            if !acquirePrivileges() {
-                print("You need to enable EscapeArtist in the System Preferences")
-            }
+        if requiresPrivileges() && !isTrusted() {
+            print("You need to enable EscapeArtist in the System Preferences. This may require a system restart.")
         }
         
         listenForEvents()
     }
 }
 
-// MARK: Acquire Privleges
-func acquirePrivileges() -> Bool {
-    let attrs = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as
-    CFDictionary
-    return AXIsProcessTrustedWithOptions(attrs)
+// MARK: Acquire Privileges
+func isTrusted() -> Bool {
+    return AXIsProcessTrustedWithOptions([kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary)
 }
 
-// MARK: Event Monitor
+func requiresPrivileges() -> Bool {
+    let os = ProcessInfo().operatingSystemVersion
+    return os.majorVersion == 10 && os.minorVersion >= 14
+}
+
+// MARK: Subscribe to keycode notifications
 func listenForEvents() {
     NSEvent.addGlobalMonitorForEvents(matching: .keyDown, handler: keyDown)
     NSEvent.addGlobalMonitorForEvents(matching: .flagsChanged, handler: modifierChanged)
 }
 
-
-// MARK: Key Input from EventHandler
+// MARK: Key listener callbacks
 func keyDown(event: (NSEvent)) -> Void {
     shouldEsc = false
 }
 
 func modifierChanged(event: (NSEvent)) -> Void {
     switch event.keyCode {
-    case RCTRL :
-        handleCtrl(flags:event.modifierFlags.rawValue)
-        break
-    case LCTRL:
+    case LCTRL, RCTRL :
         handleCtrl(flags:event.modifierFlags.rawValue)
         break
     default:
@@ -56,6 +52,7 @@ func modifierChanged(event: (NSEvent)) -> Void {
     }
 }
 
+// MARK: HotKey Logic
 func handleCtrl(flags : UInt) {
     if flags == LCTRLMOD || flags == RCTRLMOD {
         // CTRL on
@@ -71,7 +68,7 @@ func handleCtrl(flags : UInt) {
     }
 }
 
-// MARK: Key Replacement
+// MARK: HotKey Actuation
 func fireKey(keyCode : UInt16) {
     let src = CGEventSource(stateID: CGEventSourceStateID.hidSystemState)
     let loc = CGEventTapLocation.cghidEventTap

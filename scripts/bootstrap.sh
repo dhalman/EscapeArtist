@@ -3,3 +3,4 @@ mkdir -p /usr/local/bin
 cp `dirname "$0"`/../bin/EscapeArtist /usr/local/bin
 launchctl load -w ~/Library/LaunchAgents/com.escapeartist.plist
 launchctl start com.escapeartist
+echo "Escape artist is installed! If not running, please try restarting system"
