@@ -15,11 +15,12 @@ Usage:
 Installation:
 1) Download/Clone package
 2) Execute `./scripts/bootstrap.sh`
-3) (Sometimes Required) Accessbility permissions - When prompted, open accessibilty preferences and check the box next to EscapeArtist to allow ESC keycode globally. Feel free to test without installing permissions to see if necessary on your system. If not required, feel free to remove the permission check from main.swift and rebuild/replace the bin in /usr/local/bin
+3) (Sometimes Required) Accessbility permissions - If prompted, open accessibilty preferences and check the box next to EscapeArtist to allow ESC keycode globally. Feel free to test without installing permissions to see if necessary on your system. If not required, feel free to remove the permission check from main.swift and rebuild/replace the bin in /usr/local/bin
 
 Uninstallation:
 1) Execute `./scripts/uninstall.sh`
 2) (Optional) Remove Downloaded/Cloned package
+3) (Optional) If permissions were granted, feel free to remove the entry in System Preferences -> Privacy -> Accessibility
 
 Note:
 This program does not use any network or disk I/O. It does not log/save/report any information regarding user data, keystroke history, or storage filesystem. Feel free to read the (very short) source code to confirm for yourself.
