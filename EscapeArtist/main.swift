@@ -1,8 +1,10 @@
 import Cocoa
 
 // MARK: Constants
-let CTRLMOD = 262401
+let LCTRLMOD = 262401
+let RCTRLMOD = 270592
 let LCTRL : UInt16 = 59
+let RCTRL : UInt16 = 62
 let ESC : UInt16 = 53
 
 // MARK: Runtime flags
@@ -11,9 +13,13 @@ var shouldEsc = false
 // MARK: Startup
 class ApplicationDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
-        if !acquirePrivileges() {
-            print("You need to enable EscapeArtist in the System Preferences")
+        let os = ProcessInfo().operatingSystemVersion
+        if os.majorVersion == 10 && os.minorVersion >= 14 {
+            if !acquirePrivileges() {
+                print("You need to enable EscapeArtist in the System Preferences")
+            }
         }
+        
         listenForEvents()
     }
 }
@@ -39,22 +45,29 @@ func keyDown(event: (NSEvent)) -> Void {
 
 func modifierChanged(event: (NSEvent)) -> Void {
     switch event.keyCode {
-    case LCTRL : // L-CTRL
-        if event.modifierFlags.rawValue == CTRLMOD {
-            // CTRL on
-            shouldEsc = true
-            
-        } else {
-            // CTRL off
-            if shouldEsc {
-                shouldEsc = false
-                
-                fireKey(keyCode: ESC)
-            }
-        }
+    case RCTRL :
+        handleCtrl(flags:event.modifierFlags.rawValue)
+        break
+    case LCTRL:
+        handleCtrl(flags:event.modifierFlags.rawValue)
         break
     default:
         shouldEsc = false
+    }
+}
+
+func handleCtrl(flags : UInt) {
+    if flags == LCTRLMOD || flags == RCTRLMOD {
+        // CTRL on
+        shouldEsc = true
+        
+    } else {
+        // CTRL off
+        if shouldEsc {
+            shouldEsc = false
+            
+            fireKey(keyCode: ESC)
+        }
     }
 }
 
